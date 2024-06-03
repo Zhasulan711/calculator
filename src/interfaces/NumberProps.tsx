@@ -1,6 +1,6 @@
 export interface NumberProps {
-  number: number;
-  secondNumber: number;
-  setSecondNumber: React.Dispatch<React.SetStateAction<number>>;
-  setNumber: React.Dispatch<React.SetStateAction<number>>;
+  number: string;
+  secondNumber: string;
+  setSecondNumber: React.Dispatch<React.SetStateAction<string>>;
+  setNumber: React.Dispatch<React.SetStateAction<string>>;
 }

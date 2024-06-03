@@ -5,6 +5,11 @@ import { StatesProps } from "../../interfaces/StatesProps";
 
 type DisplayProps = NumberProps & StatesProps;
 
+const roundNumber = (number: number, decimals: number) => {
+  const factor = Math.pow(10, decimals);
+  return Math.round(number * factor) / factor;
+};
+
 export const Control: React.FC<DisplayProps> = ({
   number,
   secondNumber,
@@ -19,50 +24,53 @@ export const Control: React.FC<DisplayProps> = ({
   setMultiplicationState,
   setDivisionState,
 }) => {
-  const [addition, setAddition] = useState<number>(0);
-  const [subtraction, setSubtraction] = useState<number>(0);
-  const [multiplication, setMultiplication] = useState<number>(0);
-  const [division, setDivision] = useState<number>(0);
   const [calculate, setCalculate] = useState<boolean>(false);
 
   useEffect(() => {
     if (calculate) {
       switch (true) {
         case additionState:
-          setNumber(addition);
-          setSecondNumber(0);
+          setNumber(
+            roundNumber(parseFloat(number) + parseFloat(secondNumber), 10).toString()
+          );
+          setSecondNumber("0");
           setCalculate(false);
           setAdditionState(false);
           break;
 
         case subtractionState:
-          setNumber(subtraction);
-          setSecondNumber(0);
+          setNumber(
+            roundNumber(parseFloat(number) - parseFloat(secondNumber), 10).toString()
+          );
+          setSecondNumber("0");
           setCalculate(false);
           setSubtractionState(false);
           break;
 
         case multiplicationState:
-          setNumber(multiplication);
-          setSecondNumber(0);
+          setNumber(
+            roundNumber(parseFloat(number) * parseFloat(secondNumber), 10).toString()
+          );
+          setSecondNumber("0");
           setCalculate(false);
           setMultiplicationState(false);
           break;
 
         case divisionState:
-          setNumber(division);
-          setSecondNumber(0);
+          setNumber(
+            roundNumber(parseFloat(number) / parseFloat(secondNumber), 10).toString()
+          );
+          setSecondNumber("0");
           setCalculate(false);
           setDivisionState(false);
+          break;
       }
     }
   }, [
+    number,
+    secondNumber,
     setNumber,
     setSecondNumber,
-    addition,
-    subtraction,
-    multiplication,
-    division,
     additionState,
     subtractionState,
     multiplicationState,
@@ -76,50 +84,30 @@ export const Control: React.FC<DisplayProps> = ({
   ]);
 
   const handleClickNumber = (number: number) => {
-    switch (true) {
-      case additionState:
-        setSecondNumber((prevNumber) => prevNumber * 10 + number);
-        break;
-
-      case subtractionState:
-        setSecondNumber((prevNumber) => prevNumber * 10 + number);
-        break;
-
-      case multiplicationState:
-        setSecondNumber((prevNumber) => prevNumber * 10 + number);
-        break;
-
-      case divisionState:
-        setSecondNumber((prevNumber) => prevNumber * 10 + number);
-        break;
-
-      default:
-        setNumber((prevNumber) => prevNumber * 10 + number);
-        break;
+    if (
+      additionState ||
+      subtractionState ||
+      multiplicationState ||
+      divisionState
+    ) {
+      setSecondNumber((prevNumber) =>
+        prevNumber === "0" ? number.toString() : prevNumber + number.toString()
+      );
+    } else {
+      setNumber((prevNumber) =>
+        prevNumber === "0" ? number.toString() : prevNumber + number.toString()
+      );
     }
   };
 
   const handleCalculate = () => {
-    switch (true) {
-      case additionState:
-        setCalculate(true);
-        setAddition(number + secondNumber);
-        break;
-
-      case subtractionState:
-        setCalculate(true);
-        setSubtraction(number - secondNumber);
-        break;
-
-      case multiplicationState:
-        setCalculate(true);
-        setMultiplication(number * secondNumber);
-        break;
-
-      case divisionState:
-        setCalculate(true);
-        setDivision(number / secondNumber);
-        break;
+    if (
+      additionState ||
+      subtractionState ||
+      multiplicationState ||
+      divisionState
+    ) {
+      setCalculate(true);
     }
   };
 
@@ -129,8 +117,8 @@ export const Control: React.FC<DisplayProps> = ({
     setMultiplicationState(false);
     setDivisionState(false);
 
-    setNumber(0);
-    setSecondNumber(0);
+    setNumber("0");
+    setSecondNumber("0");
     setCalculate(false);
   };
 
@@ -163,26 +151,61 @@ export const Control: React.FC<DisplayProps> = ({
   };
 
   const handleChangeSign = () => {
-    setNumber(-number);
-    setSecondNumber(-secondNumber);
+    if (
+      additionState ||
+      subtractionState ||
+      multiplicationState ||
+      divisionState
+    ) {
+      setSecondNumber((prevNumber) => (-parseFloat(prevNumber)).toString());
+    } else {
+      setNumber((prevNumber) => (-parseFloat(prevNumber)).toString());
+    }
   };
 
   const handlePercentage = () => {
-    setNumber(number / 100);
-    setSecondNumber(secondNumber / 100);
+    if (
+      additionState ||
+      subtractionState ||
+      multiplicationState ||
+      divisionState
+    ) {
+      setSecondNumber((prevNumber) =>
+        (parseFloat(prevNumber) / 100).toString()
+      );
+    } else {
+      setNumber((prevNumber) => (parseFloat(prevNumber) / 100).toString());
+    }
   };
 
   const handleBack = () => {
     let newNumber = parseFloat(number.toString().slice(0, -1));
     if (!isNaN(newNumber)) {
       newNumber = parseFloat(newNumber.toFixed(5));
-      setNumber(newNumber);
+      setNumber(newNumber.toString());
     }
 
     let newSecondNumber = parseFloat(secondNumber.toString().slice(0, -1));
     if (!isNaN(newSecondNumber)) {
       newSecondNumber = parseFloat(newSecondNumber.toFixed(5));
-      setSecondNumber(newSecondNumber);
+      setSecondNumber(newSecondNumber.toString());
+    }
+  };
+
+  const handleComma = () => {
+    if (
+      additionState ||
+      subtractionState ||
+      multiplicationState ||
+      divisionState
+    ) {
+      if (!secondNumber.includes(".")) {
+        setSecondNumber((prevNumber) => prevNumber + ".");
+      }
+    } else {
+      if (!number.includes(".")) {
+        setNumber((prevNumber) => prevNumber + ".");
+      }
     }
   };
 
@@ -290,7 +313,12 @@ export const Control: React.FC<DisplayProps> = ({
       >
         0
       </button>
-      <button className="controls-item controls-item-default">,</button>
+      <button
+        className="controls-item controls-item-default"
+        onClick={handleComma}
+      >
+        ,
+      </button>
       <button
         className="controls-item controls-item-default"
         onClick={handleBack}

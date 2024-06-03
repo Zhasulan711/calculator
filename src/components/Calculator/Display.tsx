@@ -13,9 +13,9 @@ export const Display: React.FC<DisplayProps> = ({
   return (
     <div className="display">
       <div className="display-current">
-        {additionState && secondNumber === 0
+        {additionState && secondNumber === "0"
           ? number
-          : secondNumber !== 0
+          : secondNumber !== "0"
           ? secondNumber
           : number}
       </div>

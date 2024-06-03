@@ -5,8 +5,8 @@ import { Control } from "./Control";
 import { Display } from "./Display";
 
 export const Calculator = () => {
-  const [number, setNumber] = useState<number>(0);
-  const [secondNumber, setSecondNumber] = useState<number>(0);
+  const [number, setNumber] = useState<string>("0");
+  const [secondNumber, setSecondNumber] = useState<string>("0");
   const [additionState, setAdditionState] = useState<boolean>(false);
   const [subtractionState, setSubtractionState] = useState<boolean>(false);
   const [multiplicationState, setMultiplicationState] =
