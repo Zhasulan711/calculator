@@ -1,0 +1,100 @@
+@mixin calculator-shadow() {
+  -webkit-box-shadow: 0px 20px 120px -20px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 0px 20px 120px -20px rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 20px 120px -20px rgba(0, 0, 0, 0.7);
+}
+
+$display-color: #333a4d;
+$transparent-white: rgba(255, 255, 255, 0.6);
+$light-grey: #eee;
+$medium-grey: #ccc;
+$light-orange: #fea170;
+$medium-orange: #f78d6c;
+
+$border-radius: 12px;
+$results-font-size: 52px;
+
+.calculator {
+  width: 320px;
+  height: 480px;
+  border-radius: 12px;
+  background-color: $light-grey;
+  @include calculator-shadow();
+
+  .display {
+    display: flex;
+    overflow: hidden;
+    height: calc(30% + 1px);
+    width: 100%;
+    background: $display-color;
+
+    &-current {
+      width: 100%;
+      height: 50%;
+
+      padding-right: 10px;
+      padding-top: 70px;
+      display: flex;
+      justify-content: flex-end;
+
+      font-size: $results-font-size;
+      color: $light-grey;
+    }
+  }
+
+  .controls {
+    display: grid;
+    grid-template-columns: repeat(4, 25%);
+    height: 70%;
+
+    .controls-item {
+      border: 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      border-right: 1px solid rgba(0, 0, 0, 0.05);
+
+      font: 400 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+
+      &.controls-item-default {
+        &:hover {
+          background: darken($light-grey, 10%);
+        }
+      }
+
+      &.controls-item-darker {
+        background: #a9a9a9;
+
+        &:hover {
+          background: #808588;
+        }
+      }
+
+      &.controls-item-orangeLight {
+        background: $light-orange;
+
+        &:hover {
+          background: darken($light-orange, 5%);
+        }
+      }
+
+      &.controls-item-orangeMedium {
+        background: $medium-orange;
+
+        &:hover {
+          background: darken($medium-orange, 5%);
+        }
+      }
+
+      &:nth-last-child(1) {
+        border-bottom-right-radius: $border-radius;
+      }
+
+      &:nth-last-child(4) {
+        border-bottom-left-radius: $border-radius;
+      }
+    }
+  }
+}
