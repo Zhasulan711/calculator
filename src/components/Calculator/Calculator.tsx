@@ -63,6 +63,9 @@ export const Calculator = () => {
     setSecondNumber("0");
     setOperation("");
     setCalculate(false);
+    setLastOperand("");
+    setLastOperation("");
+    setIsResult(false);
   };
 
   const handleChangeSign = () => {
