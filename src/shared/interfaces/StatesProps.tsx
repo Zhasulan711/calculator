@@ -1,10 +1,10 @@
 export interface StatesProps {
   additionState: boolean;
-  setAdditionState: React.Dispatch<React.SetStateAction<boolean>>;
   subtractionState: boolean;
-  setSubtractionState: React.Dispatch<React.SetStateAction<boolean>>;
   multiplicationState: boolean;
-  setMultiplicationState: React.Dispatch<React.SetStateAction<boolean>>;
   divisionState: boolean;
+  setAdditionState: React.Dispatch<React.SetStateAction<boolean>>;
+  setSubtractionState: React.Dispatch<React.SetStateAction<boolean>>;
+  setMultiplicationState: React.Dispatch<React.SetStateAction<boolean>>;
   setDivisionState: React.Dispatch<React.SetStateAction<boolean>>;
 }

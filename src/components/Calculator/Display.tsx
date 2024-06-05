@@ -1,7 +1,7 @@
 import React from "react";
 
-import { NumberProps } from "../../interfaces/NumberProps";
-import { StatesProps } from "../../interfaces/StatesProps";
+import { NumberProps } from "../../shared/interfaces/NumberProps";
+import { StatesProps } from "../../shared/interfaces/StatesProps";
 
 type DisplayProps = NumberProps & StatesProps;
 

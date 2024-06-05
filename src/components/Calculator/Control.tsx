@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
-import { NumberProps } from "../../interfaces/NumberProps";
-import { StatesProps } from "../../interfaces/StatesProps";
+import { NumberProps } from "../../shared/interfaces/NumberProps";
+import { StatesProps } from "../../shared/interfaces/StatesProps";
 
 type DisplayProps = NumberProps & StatesProps;
 
@@ -212,121 +212,121 @@ export const Control: React.FC<DisplayProps> = ({
   return (
     <div className="controls">
       <button
-        className="controls-item controls-item-darker"
+        className="controls-item darker"
         onClick={handleReset}
       >
         C
       </button>
       <button
-        className="controls-item controls-item-darker"
+        className="controls-item darker"
         onClick={handleChangeSign}
       >
         +/-
       </button>
       <button
-        className="controls-item controls-item-darker"
+        className="controls-item darker"
         onClick={handlePercentage}
       >
         %
       </button>
       <button
-        className="controls-item controls-item-orangeLight"
+        className="controls-item orangeLight"
         onClick={handleDivision}
       >
         /
       </button>
       <button
-        className="controls-item controls-item-default"
+        className="controls-item default"
         onClick={() => handleClickNumber(7)}
       >
         7
       </button>
       <button
-        className="controls-item controls-item-default"
+        className="controls-item default"
         onClick={() => handleClickNumber(8)}
       >
         8
       </button>
       <button
-        className="controls-item controls-item-default"
+        className="controls-item default"
         onClick={() => handleClickNumber(9)}
       >
         9
       </button>
       <button
-        className="controls-item controls-item-orangeLight"
+        className="controls-item orangeLight"
         onClick={handleMultiplication}
       >
         x
       </button>
       <button
-        className="controls-item controls-item-default"
+        className="controls-item default"
         onClick={() => handleClickNumber(4)}
       >
         4
       </button>
       <button
-        className="controls-item controls-item-default"
+        className="controls-item default"
         onClick={() => handleClickNumber(5)}
       >
         5
       </button>
       <button
-        className="controls-item controls-item-default"
+        className="controls-item default"
         onClick={() => handleClickNumber(6)}
       >
         6
       </button>
       <button
-        className="controls-item controls-item-orangeLight"
+        className="controls-item orangeLight"
         onClick={handleDecrease}
       >
         -
       </button>
       <button
-        className="controls-item controls-item-default"
+        className="controls-item default"
         onClick={() => handleClickNumber(3)}
       >
         3
       </button>
       <button
-        className="controls-item controls-item-default"
+        className="controls-item default"
         onClick={() => handleClickNumber(2)}
       >
         2
       </button>
       <button
-        className="controls-item controls-item-default"
+        className="controls-item default"
         onClick={() => handleClickNumber(1)}
       >
         1
       </button>
       <button
-        className="controls-item controls-item-orangeLight"
+        className="controls-item orangeLight"
         onClick={handleIncrease}
       >
         +
       </button>
       <button
-        className="controls-item controls-item-default"
+        className="controls-item default"
         onClick={() => handleClickNumber(0)}
       >
         0
       </button>
       <button
-        className="controls-item controls-item-default"
+        className="controls-item default"
         onClick={handleComma}
       >
         ,
       </button>
       <button
-        className="controls-item controls-item-default"
+        className="controls-item default"
         onClick={handleBack}
       >
         &lt;-
       </button>
       <button
-        className="controls-item controls-item-orangeMedium"
+        className="controls-item orangeMedium"
         onClick={handleCalculate}
       >
         =
@@ -334,3 +334,4 @@ export const Control: React.FC<DisplayProps> = ({
     </div>
   );
 };
+

@@ -58,13 +58,13 @@ $results-font-size: 52px;
       align-items: center;
       cursor: pointer;
 
-      &.controls-item-default {
+      &.default {
         &:hover {
           background: darken($light-grey, 10%);
         }
       }
 
-      &.controls-item-darker {
+      &.darker {
         background: #a9a9a9;
 
         &:hover {
@@ -72,7 +72,7 @@ $results-font-size: 52px;
         }
       }
 
-      &.controls-item-orangeLight {
+      &.orangeLight {
         background: $light-orange;
 
         &:hover {
@@ -80,7 +80,7 @@ $results-font-size: 52px;
         }
       }
 
-      &.controls-item-orangeMedium {
+      &.orangeMedium {
         background: $medium-orange;
 
         &:hover {
