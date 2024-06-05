@@ -1,19 +1,16 @@
 import React from "react";
 
-import { NumberProps } from "../../shared/interfaces/NumberProps";
-import { StatesProps } from "../../shared/interfaces/StatesProps";
-
-type DisplayProps = NumberProps & StatesProps;
+import { DisplayProps } from "../../shared/interfaces/DisplayProps";
 
 export const Display: React.FC<DisplayProps> = ({
-  number,
-  additionState,
+  operation,
   secondNumber,
+  number,
 }) => {
   return (
     <div className="display">
       <div className="display-current">
-        {additionState && secondNumber === "0"
+        {operation && secondNumber === "0"
           ? number
           : secondNumber !== "0"
           ? secondNumber

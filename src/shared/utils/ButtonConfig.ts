@@ -6,7 +6,7 @@ export type ButtonHandlers = {
   comma: () => void;
   calculate: () => void;
   operation: (op: string) => void;
-  clickNumber: (num: number) => void;
+  clickNumber: (num: string) => void;
 };
 
 export type ButtonHandler = keyof ButtonHandlers;

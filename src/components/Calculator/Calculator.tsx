@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 
 import "../../styles/Calculator.scss";
-import { Button } from "./Button";
 import { roundNumber } from "../../shared/utils/roundNumber";
 import { ButtonHandlers, buttons } from "../../shared/utils/ButtonConfig";
 import { performCalculation } from "../../shared/utils/performCalculation";
+import { Display } from "./Display";
+import { Control } from "./Control";
 
 export const Calculator = () => {
   const [number, setNumber] = useState<string>("0");
@@ -30,11 +31,9 @@ export const Calculator = () => {
 
   const getSetter = () => (operation ? setSecondNumber : setNumber);
 
-  const handleClickNumber = (num: number) => {
+  const handleClickNumber = (num: string) => {
     const setter = getSetter();
-    setter((prevNumber) =>
-      prevNumber === "0" ? num.toString() : prevNumber + num.toString()
-    );
+    setter((prevNumber) => (prevNumber === "0" ? num : prevNumber + num));
   };
 
   const handleOperation = (op: string) => {
@@ -102,34 +101,12 @@ export const Calculator = () => {
 
   return (
     <div className="calculator">
-      <div className="display">
-        <div className="display-current">
-          {operation && secondNumber === "0"
-            ? number
-            : secondNumber !== "0"
-            ? secondNumber
-            : number}
-        </div>
-      </div>
-      <div className="controls">
-        {buttons.map((button, index) => (
-          <Button
-            key={index}
-            className={button.className}
-            onClick={() => {
-              if (button.handler === "clickNumber") {
-                buttonHandlers[button.handler](parseInt(button.children));
-              } else if (button.handler === "operation") {
-                buttonHandlers[button.handler](button.children);
-              } else {
-                buttonHandlers[button.handler]();
-              }
-            }}
-          >
-            {button.children}
-          </Button>
-        ))}
-      </div>
+      <Display
+        number={number}
+        secondNumber={secondNumber}
+        operation={operation}
+      />
+      <Control buttons={buttons} buttonHandlers={buttonHandlers} />
     </div>
   );
 };

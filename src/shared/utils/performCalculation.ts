@@ -10,7 +10,7 @@ export const performCalculation = (
     case "-":
       return num1 - num2;
 
-    case "*":
+    case "x":
       return num1 * num2;
 
     case "/":
