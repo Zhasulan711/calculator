@@ -33,7 +33,16 @@ export const Calculator = () => {
 
   const handleClickNumber = (num: string) => {
     const setter = getSetter();
-    setter((prevNumber) => (prevNumber === "0" ? num : prevNumber + num));
+    setter((prevNumber) =>
+      isResult
+        ? num
+        : prevNumber === "0."
+        ? prevNumber + num
+        : prevNumber.includes("0")
+        ? num
+        : prevNumber + num
+    );
+    setIsResult(false);
   };
 
   const handleOperation = (op: string) => {
@@ -70,7 +79,9 @@ export const Calculator = () => {
 
   const handleChangeSign = () => {
     const setter = getSetter();
-    setter((prevNumber) => (-parseFloat(prevNumber)).toString());
+    setter((prevNumber) =>
+      isResult ? "-0" : (-parseFloat(prevNumber)).toString()
+    );
   };
 
   const handlePercentage = () => {
@@ -80,7 +91,7 @@ export const Calculator = () => {
 
   const handleBack = () => {
     const setter = getSetter();
-    setter((prevNumber) => prevNumber.slice(0, -1) || "0");
+    setter((prevNumber) => (isResult ? "0" : prevNumber.slice(0, -1) || "0"));
   };
 
   const handleComma = () => {
