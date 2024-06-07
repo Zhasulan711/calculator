@@ -69,7 +69,6 @@ export const Calculator = () => {
         : setNumber("Error");
 
       setIsResult(true);
-      setCalculate(false);
     }
   };
 
