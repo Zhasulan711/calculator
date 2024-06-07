@@ -1,13 +1,11 @@
 import React from "react";
 
-export const Button = ({
+import { ButtonComponentProps } from "../../shared/utils/ButtonConfig";
+
+export const Button: React.FC<ButtonComponentProps> = ({
   className,
   onClick,
   children,
-}: {
-  className: string;
-  onClick: () => void;
-  children: React.ReactNode;
 }) => (
   <button className={`controls-item ${className}`} onClick={onClick}>
     {children}

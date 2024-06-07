@@ -11,13 +11,13 @@ export type ButtonHandlers = {
 
 export type ButtonHandler = keyof ButtonHandlers;
 
-export type Button = {
+export type ButtonConfig = {
   className: string;
   handler: ButtonHandler;
   children: string;
 };
 
-export const buttons: Button[] = [
+export const buttons: ButtonConfig[] = [
   {
     className: "darker",
     handler: "reset",
@@ -119,3 +119,14 @@ export const buttons: Button[] = [
     children: "=",
   },
 ];
+
+export interface ButtonProps {
+  buttons: ButtonConfig[];
+  buttonHandlers: ButtonHandlers;
+}
+
+export interface ButtonComponentProps {
+  className: string;
+  onClick: () => void;
+  children: React.ReactNode;
+}
