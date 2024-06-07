@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 
 import "../../styles/Calculator.scss";
-import { roundNumber } from "../../shared/utils/roundNumber";
-import { ButtonHandlers, buttons } from "../../shared/utils/ButtonConfig";
-import { performCalculation } from "../../shared/utils/performCalculation";
 import { Display } from "./Display";
 import { Control } from "./Control";
+import { ButtonHandlers } from "../../shared/types";
+import { buttons } from "../../shared/constants";
+import { roundNumber, performCalculation } from "../../shared/utils";
 
 export const Calculator = () => {
   const [number, setNumber] = useState<string>("0");

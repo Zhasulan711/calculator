@@ -1,21 +1,4 @@
-export type ButtonHandlers = {
-  reset: () => void;
-  changeSign: () => void;
-  percentage: () => void;
-  back: () => void;
-  comma: () => void;
-  calculate: () => void;
-  operation: (op: string) => void;
-  clickNumber: (num: string) => void;
-};
-
-export type ButtonHandler = keyof ButtonHandlers;
-
-export type ButtonConfig = {
-  className: string;
-  handler: ButtonHandler;
-  children: string;
-};
+import { ButtonConfig } from "../types";
 
 export const buttons: ButtonConfig[] = [
   {
@@ -119,14 +102,3 @@ export const buttons: ButtonConfig[] = [
     children: "=",
   },
 ];
-
-export interface ButtonProps {
-  buttons: ButtonConfig[];
-  buttonHandlers: ButtonHandlers;
-}
-
-export interface ButtonComponentProps {
-  className: string;
-  onClick: () => void;
-  children: React.ReactNode;
-}

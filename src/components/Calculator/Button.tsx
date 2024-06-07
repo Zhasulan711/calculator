@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ButtonComponentProps } from "../../shared/utils/ButtonConfig";
+import { ButtonComponentProps } from "../../shared/interfaces";
 
 export const Button: React.FC<ButtonComponentProps> = ({
   className,

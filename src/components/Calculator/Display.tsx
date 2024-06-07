@@ -1,6 +1,6 @@
 import React from "react";
 
-import { DisplayProps } from "../../shared/interface/DisplayProps";
+import { DisplayProps } from "../../shared/interfaces/DisplayProps";
 
 export const Display: React.FC<DisplayProps> = ({
   operation,
