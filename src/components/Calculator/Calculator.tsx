@@ -22,11 +22,10 @@ export const Calculator = () => {
       const num2 = parseFloat(secondNumber);
       const result = performCalculation(num1, num2, operation);
 
-      if (result !== null) {
-        setNumber(roundNumber(result, 10).toString());
-      } else {
-        setNumber("Error");
-      }
+      result !== null
+        ? setNumber(roundNumber(result, 10).toString())
+        : setNumber("Error");
+
       setSecondNumber("0");
       setOperation("");
       setCalculate(false);
@@ -69,10 +68,9 @@ export const Calculator = () => {
         setNumber(roundNumber(result, 10).toString());
       } else {
         setNumber("Error");
-        handleReset();
       }
       setIsResult(true);
-      setCalculate(true);
+      setCalculate(false);
     }
   };
 
