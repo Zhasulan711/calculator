@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import "../../styles/Calculator.scss";
+import "../../styles/root/Calculator.scss";
 import { Display } from "./Display";
 import { Control } from "./Control";
 import { ButtonHandlers } from "../../shared/types";
@@ -22,7 +22,11 @@ export const Calculator = () => {
       const num2 = parseFloat(secondNumber);
       const result = performCalculation(num1, num2, operation);
 
-      setNumber(roundNumber(result, 10).toString());
+      if (result !== null) {
+        setNumber(roundNumber(result, 10).toString());
+      } else {
+        setNumber("Error");
+      }
       setSecondNumber("0");
       setOperation("");
       setCalculate(false);
@@ -61,7 +65,12 @@ export const Calculator = () => {
         parseFloat(lastOperand),
         lastOperation
       );
-      setNumber(roundNumber(result, 10).toString());
+      if (result !== null) {
+        setNumber(roundNumber(result, 10).toString());
+      } else {
+        setNumber("Error");
+        handleReset();
+      }
       setIsResult(true);
       setCalculate(true);
     }
@@ -80,24 +89,38 @@ export const Calculator = () => {
   const handleChangeSign = () => {
     const setter = getSetter();
     setter((prevNumber) =>
-      isResult ? "-0" : (-parseFloat(prevNumber)).toString()
+      isResult && prevNumber.includes("Error")
+        ? "-0"
+        : (-parseFloat(prevNumber)).toString()
     );
   };
 
   const handlePercentage = () => {
     const setter = getSetter();
-    setter((prevNumber) => (parseFloat(prevNumber) / 100).toString());
+    setter((prevNumber) =>
+      isResult && prevNumber.includes("Error")
+        ? "0"
+        : (parseFloat(prevNumber) / 100).toString()
+    );
   };
 
   const handleBack = () => {
     const setter = getSetter();
-    setter((prevNumber) => (isResult ? "0" : prevNumber.slice(0, -1) || "0"));
+    setter((prevNumber) =>
+      isResult && prevNumber.includes("Error")
+        ? "0"
+        : prevNumber.slice(0, -1) || "0"
+    );
   };
 
   const handleComma = () => {
     const setter = getSetter();
     setter((prevNumber) =>
-      isResult ? "0." : prevNumber.includes(".") ? prevNumber : prevNumber + "."
+      isResult && prevNumber.includes("Error")
+        ? "0."
+        : prevNumber.includes(".")
+        ? prevNumber
+        : prevNumber + "."
     );
     setIsResult(false);
   };
