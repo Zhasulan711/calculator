@@ -64,11 +64,10 @@ export const Calculator = () => {
         parseFloat(lastOperand),
         lastOperation
       );
-      if (result !== null) {
-        setNumber(roundNumber(result, 10).toString());
-      } else {
-        setNumber("Error");
-      }
+      result !== null
+        ? setNumber(roundNumber(result, 10).toString())
+        : setNumber("Error");
+
       setIsResult(true);
       setCalculate(false);
     }
